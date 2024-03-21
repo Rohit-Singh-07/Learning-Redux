@@ -4,7 +4,11 @@ import { addUser, removeUser, updateUser } from "./reducers/UserReducer.jsx";
 
 function App() {
   const {users} = useSelector((state) => state.UserReducer);
-  console.log(users);
+  const dispatch = useDispatch();
+
+  const handleRemoveUser = (userId) => {
+    dispatch(removeUser(userId));
+  };
 
   return (
     <>
@@ -21,7 +25,7 @@ function App() {
           <h1 className="bg-blue-200 flex justify-center items-center h-11 w-32 m-5 rounded-lg">{value.name}</h1>
           <h1 className="bg-blue-200 flex justify-center items-center h-11 w-32 m-5 rounded-lg">{value.username}</h1>
           <h2 className="bg-blue-200 flex justify-center items-center h-11 w-52 m-5 rounded-lg">{value.email}</h2>
-          <button className="bg-red-200 flex justify-center items-center h-11 w-32 m-5 rounded-lg">Remove</button>
+          <button onClick={() => handleRemoveUser(value.id)} className="bg-red-200 flex justify-center items-center h-11 w-32 m-5 rounded-lg">Remove</button>
         </div>
       })}
     </>
